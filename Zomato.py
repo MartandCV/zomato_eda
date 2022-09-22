@@ -186,5 +186,51 @@ sns.countplot(x='Rating color', data=ratings, palette=['blue', 'red', 'orange', 
 final_df[final_df['Rating color']=='White'].groupby('Country').size().reset_index()
 
 
-# # Observation
-# Max 0 ratings are from India
+# # Observation 4
+# - Max 0 ratings are from India
+
+# # Find out which country uses which currency.
+
+# In[34]:
+
+
+final_df.columns
+
+
+# In[37]:
+
+
+final_df.groupby(['Country','Currency']).size().reset_index()
+
+
+# # Which Countries have online deliveries
+
+# In[38]:
+
+
+final_df[final_df['Has Online delivery']=='Yes'].Country.value_counts()
+
+
+# In[41]:
+
+
+final_df[['Has Online delivery','Country']].groupby(['Has Online delivery','Country']).size().reset_index()
+
+
+# # Observation 5
+# - Online deliveries are available only in India and UAE
+
+# # Plot a pie chart for top 5 distributions
+
+# In[42]:
+
+
+city_values =  final_df.City.value_counts().values
+city_index = final_df.City.value_counts().index
+
+
+# In[44]:
+
+
+plt.pie(city_values[:5], labels=city_index[:5],autopct='%1.2f%%')
+
